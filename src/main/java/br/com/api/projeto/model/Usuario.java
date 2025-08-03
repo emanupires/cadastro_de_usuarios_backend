@@ -8,7 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,15 +26,22 @@ public class Usuario implements Serializable {
     @Column(name = "id")
     private int id;
 
+    @NotBlank(message = "O nome deve ser preenchido!")
+    @Size(min = 3, message="O nome deve ter no mínimo 3 caracteres.")
     @Column(name = "nome", length = 200, nullable = false)
     private String nome;
 
+    @Email(message = "O e-mail deve ser válido!")
+    @NotBlank(message = "O e-mail deve ser preenchido!")
     @Column(name = "email", length = 50, nullable = false)
     private String email;
 
+    @NotBlank(message = "A senha deve ser preenchido!")
     @Column(name = "senha", columnDefinition = "TEXT", nullable = false)
     private String senha;
 
+    @NotBlank(message = "O telefone deve ser preenchido!")
     @Column(name = "telefone", length = 15, nullable = false)
     private String telefone;
 }
+
